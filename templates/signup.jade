@@ -1,0 +1,26 @@
+extends layout
+
+block content
+    h2 Join the club
+    h3 So you want to join the club?
+    if validationFailed
+        p!= validationError
+    else
+        p
+            | Who would join the Treehouse Club must answer me these questions
+            | three, ere the other side he see. 
+    form(method='post')
+        p
+            label
+                | What is your name?
+                input(type='text', name='name', value=form.name)
+        p
+            label
+                | What is your quest?
+                input(type='text', name='quest', value=form.quest)
+        p
+            label
+                | What is your favorite color?
+                input(type='password', name='password')
+        p
+            input(type='submit', value='Pretty please, let me join!')

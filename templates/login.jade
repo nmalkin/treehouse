@@ -1,0 +1,23 @@
+extends layout
+
+block content
+    h2 Enter the club
+    if(validationFailed == 'name')
+        h3 #{form.name}? #{form.name}? I don't know anyone by that name!
+        p Maybe you want to try again.
+    else if(validationFailed == 'password')
+        h3 You did not recite the incantation correctly. No admission for you.
+        p But you could try again.
+    else
+        h3 So you say you're a member, huh? Well, prove it.
+    form(method='post')
+        p
+            label
+                | What do they call you, stranger?
+                input(type='text', name='name', value=form.name)
+        p
+            label
+                | Recite the secret incantation, now.
+                input(type='password', name='password')
+        p
+            input(type='submit', value='Attempt entry')

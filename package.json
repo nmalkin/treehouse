@@ -1,0 +1,14 @@
+{
+    "name": "treehouse",
+    "description": "A demo sites for creating accounts and logging in",
+    "version": "0.1.0",
+    "scripts": {
+        "start": "coffee server.coffee"
+    },
+    "dependencies": {
+        "bcrypt": "latest",
+        "express": "latest",
+        "jade": "latest",
+        "redis": "latest"
+    }
+}
