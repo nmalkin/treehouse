@@ -20,6 +20,7 @@ app.use express.cookieParser()
 app.use express.bodyParser()
 app.use express.session
     secret: process.env.SESSION_SECRET || 'secret'
+app.use express.static __dirname + '/static'
 
 showError = (status, res) ->
     res.render status + '.jade', { status: status }
@@ -122,8 +123,6 @@ app.post '/signup', (req, res) ->
                     , () ->
                         req.session.authenticated = req.body.name
                         res.redirect '/inside'
-
-app.use express.static __dirname + '/static'
 
 app.get '*', (req, res) ->
     showError 404, res
