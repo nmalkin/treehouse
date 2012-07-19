@@ -103,7 +103,9 @@ app.post '/signup', (req, res) ->
                 validationError: error
 
         # Did we get some input?
-        if not (req.body.name? and req.body.quest? and req.body.password?)
+        if not (req.body.name? and  req.body.name != "" and
+        req.body.quest? and req.body.quest != "" and
+        req.body.password? and req.body.password != "")
             validationError "I'm not letting you in until you answer <em>all</em>
                 of my questions."
             return
