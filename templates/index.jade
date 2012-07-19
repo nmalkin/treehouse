@@ -1,13 +1,23 @@
 extends layout
 
+block styles
+    style
+        ul {
+            margin-left: -15px;
+        }
+
+        li.btn {
+            margin: 18px;
+        }
+
 block content
     h3 This treehouse is members-only.
     ul
-        li
+        li.btn
             a(href='login') I'm a member, let me in!
-        li
+        li.btn
             a(href='signup') I'm not a member, but, oh, how I wish I were one.
-        li
+        li.btn
             a(href='https://github.com/nmalkin/treehouse')
                 | I don't want to be part of your stupid club.
                 | I'll start my own, a better one, I tell you!

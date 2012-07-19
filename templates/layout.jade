@@ -2,7 +2,18 @@
 html
     head
         title Treehouse
+        link(rel='stylesheet', href='/css/lib/bootstrap.css')
+        style
+            body {
+                padding-top: 60px;
+            }
+        block styles
     body
-        h1
-            a(href='/') Treehouse
-        block content
+        div.navbar.navbar-fixed-top
+            div.navbar-inner
+                div.container
+                    h1.brand
+                        a(href='/') Treehouse
+
+        div.container
+            block content

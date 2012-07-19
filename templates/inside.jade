@@ -2,8 +2,8 @@ extends layout
 
 block content
     h2 Inside the Treehouse
-    h3
+    p
         | You're here, you've made it!
         | Isn't this everything you ever hoped it would be?
     form(action='/logout', method='post')
-        input(type='submit', value="This was fun, but I want to go play outside now.")
+        input.btn(type='submit', value="This was fun, but I want to go play outside now.")
