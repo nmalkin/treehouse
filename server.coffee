@@ -126,6 +126,45 @@ app.post '/signup', (req, res) ->
                         req.session.authenticated = req.body.name
                         res.redirect '/inside'
 
+app.get '/password', (req, res) ->
+    if req.session.authenticated
+        res.render 'password.jade',
+            validationFailed: false
+    else
+        showError 401, res
+
+app.post '/password', (req, res) ->
+    if req.session.authenticated
+        # Called if there is a problem with the input
+        validationError = (error) ->
+            res.render 'password.jade',
+                validationFailed: true,
+                validationError: error
+
+        # Did we get some input?
+        if not (req.body.current? and  req.body.current != "" and
+        req.body.new? and req.body.new != "" and
+        req.body.verify? and req.body.verify != "")
+            validationError "Please fill out all the fields."
+            return
+
+        # Do the new passwords match?
+        if req.body.new != req.body.verify
+            validationError "The two new passwords didn't match."
+
+        # Look up user
+        redis.hgetall req.session.authenticated, (err, user) ->
+            validatePassword req.body.current, user.password, (matches) ->
+                if not matches
+                    validationError "That's not your current password."
+                    return
+
+                encryptPassword req.body.new, (hash) ->
+                    redis.hset req.session.authenticated, 'password', hash, () ->
+                        res.render 'password_success.jade'
+    else
+        showError 401, res
+
 app.get '*', (req, res) ->
     showError 404, res
 app.post '*', (req, res) ->
